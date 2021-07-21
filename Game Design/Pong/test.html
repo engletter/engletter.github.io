@@ -1,0 +1,68 @@
+<html>
+<head>
+<title> Secret Game </title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script>
+
+
+
+	function start(){
+		sjs.open("target", 500, 400);
+	
+	
+	var ball = new sjs.Image("Images/planet.png");
+	ball.type = "ball";
+	ball.setSize(25, 25);
+	ball.center();
+	ball.friction = 0;
+	ball.bounce();
+	ball.pushRight(8);
+	ball.pushUp(9);
+
+
+	//Paddle 1
+	var paddle1 = new sjs.Image("Images/paddle.png");
+	paddle1.type = "paddle";
+	paddle1.centerH();
+	paddle1.setSize(75, 20);
+
+	//Paddle 2
+	var paddle2 = new sjs.Image("Images/paddle.png");
+	paddle2.type = "paddle";
+	paddle2.centerH().bottom();
+	paddle2.setSize(75, 20);
+
+	sjs.keyDown(LEFT_KEY, function(){
+		paddle2.pushLeft();
+	});
+
+	sjs.keyDown(RIGHT_KEY, function(){
+		paddle2.pushRight();
+	});
+
+	sjs.onHit("ball","paddle", function(ball,paddle){
+		sjs.bounceOff(ball,paddle);
+	});
+
+	sjs.keyDown(UP_KEY, function(){
+		alert(ball.x + " " + paddle.x);
+	});
+
+	setInterval(function(){
+		if(paddle1.x > ball.x){
+			paddle1.pushLeft();
+		} else {
+			paddle1.pushRight();
+		}
+	},10);
+
+
+
+ } // end start
+</script>
+</head>
+<body onload="start()">
+<h1> Secret Game </h1>
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>
