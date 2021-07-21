@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Fish Game! </title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script src="myjavascript.js"></script>
+<script>
+     function start(){
+
+        var winx = window.screen.width*.9;
+        var winy = window.screen.height*.78;
+
+        sjs.open("target", winx, winy);
+        var background = new sjs.Image("Images/space5.png");
+        // background.setSize(500,500);
+
+          //Player Properties below here
+        var player = new sjs.Image("Images/fish_left.png");
+        player.type = "player";
+        player.setSize(100,50);
+
+        sjs.scrollable(player, background);
+
+        for(var i = 0; i < 100; i++){
+          var randx = Math.round(Math.random()*winx);
+          var randy = Math.round(Math.random()*winy);
+          var obj = new sjs.Image("Images/red_left.png");
+          obj.type = "obstacle";
+          obj.setSize(50,50);
+          obj.moveTo(randx, randy);
+        }
+
+        sjs.keyDown(RIGHT_KEY, function(){
+          player.setImage("Images/fish_right.png");
+          player.pushRight();
+        });
+
+        sjs.keyDown(LEFT_KEY, function(){
+         player.setImage("Images/fish_left.png");
+         player.pushLeft();
+        });
+
+        sjs.keyDown(UP_KEY, function(){
+          player.pushUp();
+        });
+
+        sjs.keyDown(DOWN_KEY, function(){
+          player.pushDown();
+        });
+
+} //end start
+</script>
+</head>
+<body onload="start()">
+<h1> Fish Game! </h1>
+
+     <div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>
